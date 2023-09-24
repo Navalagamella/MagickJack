@@ -1,0 +1,6 @@
+{
+  "CARTAS_EN_MAZO": ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"],
+  "CANTIDAD_MAZOS_PARA_JUGAR": 4,
+  "VIDA_BASE_JUGADOR": 100,
+  "VIDA_BASE_MAQUINA": 200
+}
