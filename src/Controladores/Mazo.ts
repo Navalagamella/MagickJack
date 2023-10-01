@@ -1,6 +1,6 @@
 import { CARTAS_EN_MAZO } from "@/.conf.json";
 
-interface ICartasEnMazo {
+export interface ICartasEnMazo {
   faceDown: boolean; //True indica que no se debe ver
   valor: string | undefined; //El valor de la carta - Hasta que no está boca arriba, no se define el valor
 }

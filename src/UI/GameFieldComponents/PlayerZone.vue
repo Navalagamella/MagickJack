@@ -2,7 +2,7 @@
   <div :data-game-field="Jugador?.tipoJugador || 'NOT_SET'" class="PlayerZone">
     <VisorDescarte />
     <VisorMazo />
-    <ZonaJuego />
+    <ZonaJuego :Cartas="Jugador?.mazo.enJuego" />
     <VisorVida />
   </div>
 </template>

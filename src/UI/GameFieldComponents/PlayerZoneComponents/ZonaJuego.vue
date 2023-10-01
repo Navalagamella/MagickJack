@@ -1,15 +1,29 @@
 <template>
   <div data-jugador-juego>
-    <div data-jugador-juego-carta>Carta 01</div>
-    <div data-jugador-juego-carta>Carta 02</div>
+    <div
+      v-for="(carta, index) in Cartas"
+      :key="index"
+      data-jugador-juego-carta
+      :class="carta.faceDown ? 'faceDown' : 'faceUp'"
+    >
+      {{ carta.valor }}
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { ICartasEnMazo } from "@/Controladores/Mazo";
+import { PropType, defineComponent } from "vue";
 
 export default defineComponent({
   name: "ZonaJuego",
+  props: {
+    Cartas: {
+      type: Array as PropType<ICartasEnMazo[]>,
+      required: false,
+      default: () => [],
+    },
+  },
 });
 </script>
 

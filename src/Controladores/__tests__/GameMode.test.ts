@@ -30,9 +30,13 @@ describe("GameMode - Controladora de la instancia de juego", () => {
       expect(gameMode.jugador).toBeUndefined();
       expect(gameMode.oponente).toBeUndefined();
     });
+    it("La primera ronda es 1", () => {
+      gameMode.iniciarPartida();
+      expect(gameMode.ronda).toBe(1);
+    });
 
-    it("Al comenzar la ronda, se establecen los jugadores con las vidas por defecto y mazos definidos", () => {
-      gameMode.nextRound();
+    it("Al iniciar la partida, se establecen los jugadores con las vidas por defecto y mazos definidos", () => {
+      gameMode.iniciarPartida();
       expect(gameMode.oponente).toBeDefined();
       expect(gameMode.oponente?.vida).toBe(VIDA_BASE_MAQUINA);
       expect(gameMode.oponente?.mazo).toBeDefined();
@@ -41,17 +45,17 @@ describe("GameMode - Controladora de la instancia de juego", () => {
       expect(gameMode.jugador?.mazo).toBeDefined();
     });
     it("La primera ronda es del oponente", () => {
-      gameMode.nextRound();
+      gameMode.iniciarPartida();
       expect(gameMode.jugadorActivo).toBe(gameMode.oponente);
     });
     it("Al finalizar el turno del oponente, se establece el turno al jugador", () => {
-      gameMode.nextRound();
+      gameMode.iniciarPartida();
       //Finaliza el turno del oponente
       gameMode.finalizarTurno();
       expect(gameMode.jugadorActivo).toBe(gameMode.jugador);
     });
     it("Al finalizar el turno del jugador, se comienza una nueva ronda que tiene el turno del oponente", () => {
-      gameMode.nextRound();
+      gameMode.iniciarPartida();
       //Finaliza el turno del oponente
       gameMode.finalizarTurno();
       //Finaliza el turno del jugador
@@ -59,7 +63,7 @@ describe("GameMode - Controladora de la instancia de juego", () => {
       expect(gameMode.jugadorActivo).toBe(gameMode.oponente);
     });
     it("Al finalizar el turno del jugador, se comienza una nueva ronda que será la 2", () => {
-      gameMode.nextRound();
+      gameMode.iniciarPartida();
       //Finaliza el turno del oponente
       gameMode.finalizarTurno();
       //Finaliza el turno del jugador

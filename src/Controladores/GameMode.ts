@@ -48,12 +48,15 @@ export class cGameMode implements IGameMode {
   /**
    * Método nextRound
    * Incrementa en uno el número de la ronda actual.
-   * Si la ronda era 0, inicia la partida
+   * ? Al comenzar la ronda, se reparte primero al oponente, luego al jugador
    * @returns El número de la nueva ronda.
    */
   public nextRound() {
-    if (this._ronda === 0) this.iniciarPartida();
+    //Al comenzar una ronda, se reparte
     this._ronda++;
+    //Turno para el oponente
+    this.turno = ETurno.OPONENTE;
+    this.jugadorActivo?.comenzarTurno();
     return this._ronda;
   }
 
@@ -66,8 +69,12 @@ export class cGameMode implements IGameMode {
   public iniciarPartida() {
     //Check para jugadores
     if (this.oponente || this.jugador) return false;
-
+    //Check para turno
+    if (this.turno > 0) return false;
+    //Inicia a los jugadores
     this.iniciarJugadores();
+    //Inicia la ronda
+    this.nextRound();
     return true;
   }
 
