@@ -29,6 +29,7 @@ export interface IMazo {
   posiblesCartas: Array<string>; //Las posibles cartas que pueden aún salir
   drawCard(faceDown?: boolean): void;
   limpiarJuego(): void; //Limpia la zona de juego y envía las cartas al descarte
+  unFlipCards(): void; //Da la vuelta a todas las cartas boca abajo que tenga, asignando valor y modificando faceDown
 }
 
 //- Determina las opciones posibles para crear una instancia de la clase mazo
@@ -205,6 +206,33 @@ export class cMazo implements IMazo {
 
   public get posiblesCartas(): Array<string> {
     return this._deckCards.cartasPosibles;
+  }
+
+  /**
+   * Método unFlipCards
+   * Da la vuelta a TODAS las cartas faceDown = true
+   * Asigna un valor y modifica faceDown => false
+   */
+
+  public unFlipCards() {
+    //Recorre todas las cartas en juego
+    this.enJuego.forEach((carta) => {
+      this.unFlipCard(carta);
+    });
+  }
+
+  /**
+   * Método unFlipCard
+   * Da la vuelta a una carta faceDown = true
+   * Asigna un valor y modifica faceDown => false
+   * @returns La carta actualizada
+   */
+  private unFlipCard(carta: ICartasEnMazo): ICartasEnMazo {
+    if (carta.faceDown) {
+      carta.faceDown = false;
+      carta.valor = this.obtenerValorUnaCartaDelMazo();
+      return carta;
+    } else return carta;
   }
 }
 

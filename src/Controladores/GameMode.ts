@@ -119,9 +119,11 @@ export class cGameMode implements IGameMode {
         this.turno = ETurno.OPONENTE;
 
         //Finaliza el juego
+        this.jugador?.mazo.unFlipCards();
         this.jugador?.mazo.limpiarJuego();
+        this.oponente?.mazo.unFlipCards();
         this.oponente?.mazo.limpiarJuego();
-        this.nextRound();
+        //this.nextRound();
         break;
       default:
         break;

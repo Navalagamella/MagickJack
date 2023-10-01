@@ -75,4 +75,24 @@ describe("Mazo - Controladora de la instancia de un mazo", () => {
     mazo.drawCard(true);
     expect(mazo.posiblesCartas.length).toBe(oldStatePosiblesCartas);
   });
+
+  it("Al llamar unFlipCards, las cartas boca abajo, se vuelven boca arriba", () => {
+    mazo = new cMazo();
+    mazo.drawCard(true);
+    mazo.drawCard(true);
+    mazo.unFlipCards();
+    expect(mazo.enJuego[0].faceDown).toBe(false);
+    expect(mazo.enJuego[1].faceDown).toBe(false);
+  });
+
+  it("Al llamar unFlipCards, las cartas boca abajo, obtienen un valor", () => {
+    mazo = new cMazo();
+    mazo.drawCard(true);
+    mazo.drawCard(true);
+    expect(mazo.enJuego[0].valor).toBeUndefined();
+    expect(mazo.enJuego[1].valor).toBeUndefined();
+    mazo.unFlipCards();
+    expect(mazo.enJuego[0].valor).toBeDefined();
+    expect(mazo.enJuego[1].valor).toBeDefined();
+  });
 });

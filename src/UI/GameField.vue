@@ -8,7 +8,7 @@
       <!-- - Zona del jugador - -->
     </PlayerZone>
 
-    <VisorRonda />
+    <VisorRonda :Ronda="GameMode.ronda.toString()" />
   </div>
 </template>
 

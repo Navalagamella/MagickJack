@@ -1,6 +1,6 @@
 <template>
   <div data-round class="VisorRonda">
-    <div data-round-view>0</div>
+    <div data-round-view>{{ Ronda }}</div>
   </div>
 </template>
 
@@ -9,6 +9,12 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "GameField",
+  props: {
+    Ronda: {
+      type: String,
+      required: true,
+    },
+  },
 });
 </script>
 
