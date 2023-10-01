@@ -40,5 +40,31 @@ describe("GameMode - Controladora de la instancia de juego", () => {
       expect(gameMode.jugador?.vida).toBe(VIDA_BASE_JUGADOR);
       expect(gameMode.jugador?.mazo).toBeDefined();
     });
+    it("La primera ronda es del oponente", () => {
+      gameMode.nextRound();
+      expect(gameMode.jugadorActivo).toBe(gameMode.oponente);
+    });
+    it("Al finalizar el turno del oponente, se establece el turno al jugador", () => {
+      gameMode.nextRound();
+      //Finaliza el turno del oponente
+      gameMode.finalizarTurno();
+      expect(gameMode.jugadorActivo).toBe(gameMode.jugador);
+    });
+    it("Al finalizar el turno del jugador, se comienza una nueva ronda que tiene el turno del oponente", () => {
+      gameMode.nextRound();
+      //Finaliza el turno del oponente
+      gameMode.finalizarTurno();
+      //Finaliza el turno del jugador
+      gameMode.finalizarTurno();
+      expect(gameMode.jugadorActivo).toBe(gameMode.oponente);
+    });
+    it("Al finalizar el turno del jugador, se comienza una nueva ronda que será la 2", () => {
+      gameMode.nextRound();
+      //Finaliza el turno del oponente
+      gameMode.finalizarTurno();
+      //Finaliza el turno del jugador
+      gameMode.finalizarTurno();
+      expect(gameMode.ronda).toBe(2);
+    });
   });
 });

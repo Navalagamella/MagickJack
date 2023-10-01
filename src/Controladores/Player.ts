@@ -31,10 +31,7 @@ export class cPlayer implements IPlayer {
     if (player) {
       if (player.vida !== undefined) this._vida = player.vida;
     }
-
-    const deckOpts = player?.deckOpts || { numeroDecksEnMazo: CANTIDAD_MAZOS_PARA_JUGAR };
-
-    this._mazo = new cMazo(deckOpts);
+    this._mazo = new cMazo(player?.deckOpts);
   }
 
   //- Vida

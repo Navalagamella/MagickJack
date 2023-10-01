@@ -1,3 +1,5 @@
+import { CARTAS_EN_MAZO } from "@/.conf.json";
+
 /**
  * * *** Mazo ***
  * ? Las dos instancias que pueden haber son para el jugador y para el oponente
@@ -24,11 +26,9 @@ export interface IDeckOPTS {
  */
 export class cMazo implements IMazo {
   constructor(mazoOpts?: IDeckOPTS) {
-    if (mazoOpts) {
-      this._deckCards = {
-        cantidad: mazoOpts.numeroDecksEnMazo,
-      };
-    }
+    this._deckCards = {
+      cantidad: this.setMazo(mazoOpts?.numeroDecksEnMazo || 1).cantidad,
+    };
   }
 
   //- Cartas
@@ -36,9 +36,22 @@ export class cMazo implements IMazo {
     cantidad: -1,
   };
 
+  private setMazo(numeroDecksEnMazo: number): { cantidad: number } {
+    let mazo: string[] = [];
+    let mazosAgregados = 0;
+    while (mazosAgregados < numeroDecksEnMazo) {
+      mazosAgregados++;
+      mazo = mazo.concat(CARTAS_EN_MAZO);
+    }
+
+    return {
+      cantidad: mazo.length,
+    };
+  }
+
   /**
-   * Propiedad vida
-   * Obtiene la vida actual.
+   * Propiedad numeroCartasEnMazo
+   * Obtiene la cantidad de cartas que están aún por jugar
    */
   public get numeroCartasEnMazo(): number {
     return this._deckCards.cantidad;
