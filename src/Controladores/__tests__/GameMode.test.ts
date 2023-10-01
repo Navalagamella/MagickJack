@@ -84,8 +84,8 @@ describe("GameMode - Controladora de la instancia de juego", () => {
 
     it("Al comenzar la partida, el oponente es de una instancia de IA y el jugador de Player", () => {
       gameMode.iniciarPartida();
-      expect(gameMode.oponente).toBeInstanceOf(cIA)
-      expect(gameMode.jugador).toBeInstanceOf(cPlayer)
-    })
+      expect(gameMode.oponente).toBeInstanceOf(cIA);
+      expect(gameMode.jugador).toBeInstanceOf(cPlayer);
+    });
   });
 });

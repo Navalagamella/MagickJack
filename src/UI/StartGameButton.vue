@@ -1,5 +1,7 @@
 <template>
-  <button data-play-button class="btn StartGameButton" id="btn-start" @click="$emit('start')">Play</button>
+  <button data-play-button class="btn StartGameButton" id="btn-start" @click="$emit('start')">
+    {{ $t("player-actions.start-game").toUpperCase() }}
+  </button>
 </template>
 
 <script lang="ts">

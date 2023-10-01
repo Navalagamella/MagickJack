@@ -4,14 +4,11 @@ import { createI18n } from "vue-i18n";
 
 const messages = {
   es: {
-    "world-selection": {
-      "select-button": "Seleccionar",
-      "infopanel-dimension": "Dimensión",
-      "infopanel-recursos": "Recursos",
-      "infopanel-habitabilidad": "Habitabilidad",
-    },
-    "general-buttons": {
-      confirmation: "Confirmar",
+    "player-actions": {
+      double: "Doblar",
+      draw: "Robar",
+      pass: "Pasar",
+      "start-game": "Start",
     },
   },
 };

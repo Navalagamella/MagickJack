@@ -1,6 +1,8 @@
 <template>
   <div data-game-frame-menu-acciones class="AccionesJugador">
-    <button data-menu-acciones-draw @click="Jugador?.mazo.drawCard()" :disabled="!Jugador?.isActive">DRAW</button>
+    <button data-menu-acciones-draw @click="Jugador?.mazo.drawCard()" :disabled="!Jugador?.isActive">
+      {{ $t("player-actions.draw") }}
+    </button>
     <button
       data-menu-acciones-doblar
       @click="
@@ -9,9 +11,11 @@
       "
       :disabled="!Jugador?.isActive"
     >
-      DOBLAR
+      {{ $t("player-actions.double") }}
     </button>
-    <button data-menu-acciones-pasar @click="Jugador?.finalizarTurno()" :disabled="!Jugador?.isActive">PASAR</button>
+    <button data-menu-acciones-pasar @click="Jugador?.finalizarTurno()" :disabled="!Jugador?.isActive">
+      {{ $t("player-actions.pass") }}
+    </button>
   </div>
 </template>
 
