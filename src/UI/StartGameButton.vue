@@ -6,6 +6,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
+  emits: ["start"],
   name: "StartGameButton",
 });
 </script>

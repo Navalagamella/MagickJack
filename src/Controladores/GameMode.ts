@@ -21,6 +21,7 @@ export interface IGameMode {
   nextRound(): number; // Incrementa en uno la ronda.
   //- Turnos
   turno: ETurno;
+  iniciarPartida(): boolean; //Inicia la partida.
   finalizarTurno(): ETurno; //Finaliza un turno
   //- Jugadores
   jugadorActivo: IPlayer | undefined;
@@ -78,10 +79,10 @@ export class cGameMode implements IGameMode {
    */
   private iniciarJugadores() {
     //- Oponente
-    this._oponente = new cPlayer({ vida: VIDA_BASE_MAQUINA });
+    this._oponente = new cPlayer({ vida: VIDA_BASE_MAQUINA, tipoJugador: ETurno.OPONENTE });
 
     //- Jugador
-    this._jugador = new cPlayer({ vida: VIDA_BASE_JUGADOR });
+    this._jugador = new cPlayer({ vida: VIDA_BASE_JUGADOR, tipoJugador: ETurno.JUGADOR });
   }
 
   //- Turnos

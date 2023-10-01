@@ -1,17 +1,30 @@
 <template>
-  <div data-game-field class="GameField">GameField</div>
+  <div data-game-field class="GameField">
+    <PlayerZone :Jugador="GameMode.oponente">
+      <!-- - Zona del oponente - -->
+    </PlayerZone>
+
+    <PlayerZone :Jugador="GameMode.jugador">
+      <!-- - Zona del jugador - -->
+    </PlayerZone>
+
+    <VisorRonda />
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { GameMode } from "@/Controladores/GameMode";
-
+import { PropType, defineComponent } from "vue";
+import { IGameMode } from "@/Controladores/GameMode";
+import VisorRonda from "./VisorRonda.vue";
+import PlayerZone from "./GameFieldComponents/PlayerZone.vue";
 export default defineComponent({
   name: "GameField",
-  data() {
-    return {
-      GameMode: GameMode,
-    };
+  components: { VisorRonda, PlayerZone },
+  props: {
+    GameMode: {
+      type: Object as PropType<IGameMode>,
+      required: true,
+    },
   },
 });
 </script>

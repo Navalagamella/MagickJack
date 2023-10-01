@@ -34,4 +34,12 @@ describe("Empezar juego", () => {
     cy.get("[data-round]").find("[data-round-view]").should("contain", "0");
   });
 
+  it("Al iniciar el juego, se establecen dos zonas de juegos, para el oponente y el jugador", () => {
+    cy.visit(url);
+    cy.get("[data-play-button]").click();
+
+    cy.get("[data-game-field]").should("exist");
+    cy.get("[data-game-field]").find(`[data-game-field="oponente"]`).should("exist");
+    cy.get("[data-game-field]").find(`[data-game-field="jugador"]`).should("exist");
+  });
 });

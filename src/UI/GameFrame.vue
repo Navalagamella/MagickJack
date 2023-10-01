@@ -2,12 +2,17 @@
   <div data-game-frame class="GameFrame">
     <div class="always-top center-page center-offset" v-if="!bIsJuegoIniciado">
       <!-- - MENU INICIO JUEGO - -->
-      <StartGameButton @start="bIsJuegoIniciado = !bIsJuegoIniciado" />
+      <StartGameButton
+        @start="
+          bIsJuegoIniciado = !bIsJuegoIniciado;
+          GameMode.iniciarPartida();
+        "
+      />
     </div>
-
     <div class="always-top p-1 center-page center-offset" v-else>
       <!-- - CONTENEDOR PRINCIPAL - -->
       <slot> </slot>
+      <AccionesJugador />
     </div>
 
     <div class="keyart" id="parallax">
@@ -27,18 +32,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { PropType, defineComponent } from "vue";
 import { Background } from "@/Controladores/Background";
 import StartGameButton from "./StartGameButton.vue";
-import { GameMode } from "@/Controladores/GameMode";
+import { IGameMode } from "@/Controladores/GameMode";
+import AccionesJugador from "./AccionesJugador.vue";
 
 export default defineComponent({
   name: "GameFrame",
-  components: { StartGameButton },
+  components: { StartGameButton, AccionesJugador },
+  props: {
+    GameMode: {
+      type: Object as PropType<IGameMode>,
+      required: true,
+    },
+  },
   data() {
     return {
       Background: Background,
-      GameMode: GameMode,
       bIsJuegoIniciado: false,
     };
   },
