@@ -1,5 +1,6 @@
 import { VIDA_BASE_JUGADOR, VIDA_BASE_MAQUINA } from "@/.conf.json";
 import { IPlayer, cPlayer, cIA } from "./Player";
+import { reactive } from "vue";
 
 export enum ETurno {
   OPONENTE,
@@ -39,7 +40,8 @@ export class cGameMode implements IGameMode {
     if (!cGameMode._instancia) {
       cGameMode._instancia = new cGameMode();
     }
-    return cGameMode._instancia;
+    //Necesario importar el reactive para que Vue aprecie los cambios
+    return reactive(cGameMode._instancia);
   }
 
   //- Ronda
@@ -123,7 +125,7 @@ export class cGameMode implements IGameMode {
         this.jugador?.mazo.limpiarJuego();
         this.oponente?.mazo.unFlipCards();
         this.oponente?.mazo.limpiarJuego();
-        //this.nextRound();
+        this.nextRound();
         break;
       default:
         break;
