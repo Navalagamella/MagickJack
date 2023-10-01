@@ -1,7 +1,7 @@
 import { IPlayer, cPlayer } from "./Player";
 import { VIDA_BASE_JUGADOR, VIDA_BASE_MAQUINA } from "@/.conf.json";
 
-enum ETurno {
+export enum ETurno {
   OPONENTE,
   JUGADOR,
 }

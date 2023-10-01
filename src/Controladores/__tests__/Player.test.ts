@@ -1,5 +1,6 @@
 import { VIDA_BASE_NOT_SET, VIDA_BASE_JUGADOR, VIDA_BASE_MAQUINA, CARTAS_EN_MAZO } from "@/.conf.json";
 import { IPlayer, cPlayer } from "../Player";
+import { ETurno } from "../GameMode";
 
 const lengthArrayCartasConfiguradas = CARTAS_EN_MAZO.length;
 
@@ -48,12 +49,24 @@ describe("Player - Controladora de la instancia de un jugador", () => {
       expect(player.mazo.numeroCartasEnMazo).toBe(3 * lengthArrayCartasConfiguradas);
     });
     it("Al iniciar turno, si no hay cartas en juego, pone en juego dos cartas", () => {
-      player = new cPlayer({
-        deckOpts: {
-          numeroDecksEnMazo: 3,
-        },
+      player = new cPlayer();
+      player.comenzarTurno();
+      expect(player.mazo.enJuego).toHaveLength(2);
+    });
+    it("Al iniciar turno del oponente, si no hay cartas en juego, la primera está boca arriba y la segunda carta en juego está boca abajo", () => {
+      player = new cPlayer({ tipoJugador: ETurno.OPONENTE });
+      player.comenzarTurno();
+      const cartasEnJuego = player.mazo.enJuego;
+      expect(cartasEnJuego[0].faceDown).toBe(false);
+      expect(cartasEnJuego[cartasEnJuego.length - 1].faceDown).toBe(true);
+    });
+    it("Al iniciar turno del jugador, si no hay cartas en juego, las dos cartas están boca arriba", () => {
+      player = new cPlayer();
+      player.comenzarTurno();
+      const cartasEnJuego = player.mazo.enJuego;
+      cartasEnJuego.forEach((carta) => {
+        expect(carta.faceDown).toBe(false);
       });
-      expect(player.mazo.numeroCartasEnMazo).toBe(3 * lengthArrayCartasConfiguradas);
     });
   });
 });

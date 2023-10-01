@@ -66,5 +66,15 @@ describe("GameMode - Controladora de la instancia de juego", () => {
       gameMode.finalizarTurno();
       expect(gameMode.ronda).toBe(2);
     });
+
+    it("Antes de comenzar, el jugador activo es undefined", () => {
+      expect(gameMode.jugadorActivo).toBeUndefined();
+    });
+
+    it("Si gameMode tiene un turno inválido el jugador activo es undefined", () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      gameMode.turno = 99 as any;
+      expect(gameMode.jugadorActivo).toBeUndefined();
+    });
   });
 });

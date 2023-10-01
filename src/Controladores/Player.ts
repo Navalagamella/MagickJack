@@ -1,3 +1,4 @@
+import { ETurno } from "./GameMode";
 import { IDeckOPTS, IMazo, cMazo } from "./Mazo";
 import { VIDA_BASE_NOT_SET, CANTIDAD_MAZOS_PARA_JUGAR } from "@/.conf.json";
 /**
@@ -14,11 +15,14 @@ export interface IPlayer {
   vida: number; // La vida actual del jugador
   //- Mazo
   mazo: IMazo; // El mazo del jugador
+  //- Turno
+  comenzarTurno(): void; // Comienza el turno del jugador
 }
 
 //- Determina las opciones posibles para crear una instancia de la clase jugador
 export interface IPlayerOPTS {
   vida: number; //Requerido
+  tipoJugador: ETurno; //Requerido
   deckOpts?: IDeckOPTS; //Opciones para el mazo
 }
 
@@ -32,7 +36,10 @@ export class cPlayer implements IPlayer {
       if (player.vida !== undefined) this._vida = player.vida;
     }
     this._mazo = new cMazo(player?.deckOpts);
+    this.tipoJugador = player?.tipoJugador !== undefined ? player.tipoJugador : ETurno?.JUGADOR;
   }
+
+  private tipoJugador: ETurno;
 
   //- Vida
   private _vida = VIDA_BASE_NOT_SET;
@@ -49,11 +56,25 @@ export class cPlayer implements IPlayer {
   private _mazo: IMazo = new cMazo();
 
   /**
-   * Proviedad mazo
+   * Propiedad mazo
    * Obtiene la referencia de la instancia de la clase mazo
    */
   public get mazo() {
     return this._mazo;
+  }
+
+  //- Turno
+
+  /**
+   * Propiedad comenzarTurno
+   * Realiza las acciones para comenzar el turno del jugador
+   */
+  public comenzarTurno() {
+    //Al comenzar el turno, se deben robar dos cartas
+    this.mazo.drawCard();
+    //Si es el oponente, al comenzar el turno, la segunda carta está boca abajo
+    const faceDown = this.tipoJugador === ETurno.OPONENTE;
+    this.mazo.drawCard(faceDown);
   }
 }
 
