@@ -1,35 +1,61 @@
 $primary: #ffaf1b;
 
 body {
-    background-color: $primary !important;
-    font-family: 'Verdana' !important;
+  background-color: $primary !important;
+  font-family: "Verdana" !important;
+}
 
+.faceDown {
+  background-color: gray;
+  border: 1px solid black;
+  min-height: 2em;
+  min-width: 2em;
+}
+
+.faceUp {
+  background-color: white;
+  border: 1px solid black;
+  min-height: 2em;
+  min-width: 2em;
+}
+
+.VisorMazo {
+  background-color: $primary;
+  border: 1px solid black;
+  min-height: 2em;
+  min-width: 2em;
+}
+.VisorDescarte {
+  background-color: darkgrey;
+  border: 1px solid black;
+  min-height: 2em;
+  min-width: 2em;
 }
 
 .center-offset {
-    transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .always-top {
-    z-index: 1000;
-    pointer-events: none; /* No poner en botones ya que deshabilita el click */
+  z-index: 1000;
+  pointer-events: none; /* No poner en botones ya que deshabilita el click */
 }
 .always-top button {
-    pointer-events: auto;
+  pointer-events: auto;
 }
 .always-top input {
-    pointer-events: auto;
+  pointer-events: auto;
 }
 .center-page {
-    position: fixed;
-    top: 50%;
-    left: 50%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
 }
 .debug-panel {
-    margin: 1em;
-    border-radius: 1em;
-    background-color: rgba(255, 255, 255, 0.5);
-    color: #000;
+  margin: 1em;
+  border-radius: 1em;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #000;
 }
 
 @import "node_modules/bootstrap/scss/bootstrap.scss";

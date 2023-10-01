@@ -1,9 +1,9 @@
 <template>
   <div :data-game-field="Jugador?.tipoJugador || 'NOT_SET'" class="PlayerZone">
-    <VisorDescarte />
-    <VisorMazo />
+    <VisorDescarte :Cartas="Jugador?.mazo.descarte" />
+    <VisorMazo :CartasEnMazo="Jugador?.mazo.numeroCartasEnMazo" />
     <ZonaJuego :Cartas="Jugador?.mazo.enJuego" />
-    <VisorVida />
+    <VisorVida :Vida="Jugador?.vida" />
   </div>
 </template>
 
