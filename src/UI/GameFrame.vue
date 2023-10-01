@@ -12,7 +12,7 @@
     <div class="always-top p-1 center-page center-offset" v-else>
       <!-- - CONTENEDOR PRINCIPAL - -->
       <slot> </slot>
-      <AccionesJugador />
+      <AccionesJugador :Jugador="GameMode.jugador" />
     </div>
 
     <div class="keyart" id="parallax">

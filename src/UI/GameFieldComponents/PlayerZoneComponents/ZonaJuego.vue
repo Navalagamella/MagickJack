@@ -1,5 +1,5 @@
 <template>
-  <div data-jugador-juego>
+  <div data-jugador-juego class="d-flex flex-row justify-center align-items-center">
     <div
       v-for="(carta, index) in Cartas"
       :key="index"

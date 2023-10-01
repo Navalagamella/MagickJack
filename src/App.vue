@@ -14,7 +14,7 @@ export default defineComponent({
   components: { GameFrame, GameField },
   data() {
     return {
-      gameMode: new cGameMode(),
+      gameMode: cGameMode.obtenerInstancia(),
     };
   },
 });

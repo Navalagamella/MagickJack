@@ -1,5 +1,6 @@
 import { cGameMode, IGameMode } from "../GameMode";
 import { VIDA_BASE_JUGADOR, VIDA_BASE_MAQUINA } from "@/.conf.json";
+import { cPlayer, cIA } from "../Player";
 
 /**
  *? *** Tests para la clase GameMode ***
@@ -80,5 +81,11 @@ describe("GameMode - Controladora de la instancia de juego", () => {
       gameMode.turno = 99 as any;
       expect(gameMode.jugadorActivo).toBeUndefined();
     });
+
+    it("Al comenzar la partida, el oponente es de una instancia de IA y el jugador de Player", () => {
+      gameMode.iniciarPartida();
+      expect(gameMode.oponente).toBeInstanceOf(cIA)
+      expect(gameMode.jugador).toBeInstanceOf(cPlayer)
+    })
   });
 });

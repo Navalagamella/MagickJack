@@ -1,5 +1,5 @@
-import { IPlayer, cPlayer } from "./Player";
 import { VIDA_BASE_JUGADOR, VIDA_BASE_MAQUINA } from "@/.conf.json";
+import { IPlayer, cPlayer, cIA } from "./Player";
 
 export enum ETurno {
   OPONENTE,
@@ -34,6 +34,14 @@ export interface IGameMode {
  * Controla el flujo y lógica del juego, incluyendo las rondas y los jugadores.
  */
 export class cGameMode implements IGameMode {
+  private static _instancia: undefined | IGameMode;
+  static obtenerInstancia() {
+    if (!cGameMode._instancia) {
+      cGameMode._instancia = new cGameMode();
+    }
+    return cGameMode._instancia;
+  }
+
   //- Ronda
   private _ronda = 0;
 
@@ -86,7 +94,7 @@ export class cGameMode implements IGameMode {
    */
   private iniciarJugadores() {
     //- Oponente
-    this._oponente = new cPlayer({ vida: VIDA_BASE_MAQUINA, tipoJugador: ETurno.OPONENTE });
+    this._oponente = new cIA({ vida: VIDA_BASE_MAQUINA, tipoJugador: ETurno.OPONENTE });
 
     //- Jugador
     this._jugador = new cPlayer({ vida: VIDA_BASE_JUGADOR, tipoJugador: ETurno.JUGADOR });
@@ -105,9 +113,14 @@ export class cGameMode implements IGameMode {
     switch (this.turno) {
       case ETurno.OPONENTE:
         this.turno = ETurno.JUGADOR;
+        this.jugadorActivo?.comenzarTurno();
         break;
       case ETurno.JUGADOR:
         this.turno = ETurno.OPONENTE;
+
+        //Finaliza el juego
+        this.jugador?.mazo.limpiarJuego();
+        this.oponente?.mazo.limpiarJuego();
         this.nextRound();
         break;
       default:
